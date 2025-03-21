@@ -6,17 +6,14 @@
 2. Initialiser les périphériques en mode par défaut (ne pas activer la BSP).
 3. Tester la LED **LD2**.
 4. Tester l'**USART2** connecté à la **STLink interne**.
-  - fonction placée avant la main
     ```c
       int __io_putchar(int ch) {
           HAL_UART_Transmit(&huart2, (uint8_t *)&ch, 1, HAL_MAX_DELAY);
           return ch;
-      }
-  - écrit dans le main pour affiché du text
+      }    
+6. Faire fonctionner la fonction `printf`.
      ```c
       printf("nathan monnier \r\n");
-    
-6. Faire fonctionner la fonction `printf`.
 
 ---
 
