@@ -18,6 +18,7 @@
 - Déterminer quel **SPI** est utilisé sur le **STM32**.
    - Le SPI utilisé sur le STM est le **SPI3**
 - Configurer les paramètres correspondants dans **STM32CubeIDE**.
+   - ![IMG](https://github.com/MonnierNathan/TP_micro_S10_MONNIER_CROCE/blob/main/Images/configSPI3.png "configSPI3")   
 
 ### 2.2 Tests
 - Faire clignoter une ou plusieurs **LED**.
