@@ -6,7 +6,17 @@
 2. Initialiser les périphériques en mode par défaut (ne pas activer la BSP).
 3. Tester la LED **LD2**.
 4. Tester l'**USART2** connecté à la **STLink interne**.
-5. Faire fonctionner la fonction `printf`.
+  - test
+    ```c
+      int __io_putchar(int ch) {
+          HAL_UART_Transmit(&huart2, (uint8_t *)&ch, 1, HAL_MAX_DELAY);
+          return ch;
+      }
+  - test2
+     ```c
+      printf("nathan monnier \r\n");
+    
+6. Faire fonctionner la fonction `printf`.
 
 ---
 
@@ -22,7 +32,7 @@
 
 ### 2.2 Tests
 - Faire clignoter une ou plusieurs **LED**.
-   - ```bash
+   - ```c
      HAL_GPIO_ToggelPIN(GPIOA,GPIO_PIN_5);
      HAL_Delay(5000);
 - Tester toutes les LED avec un **chenillard**.
