@@ -33,6 +33,22 @@
      HAL_GPIO_ToggelPIN(GPIOA,GPIO_PIN_5);
      HAL_Delay(5000);
 - Tester toutes les LED avec un **chenillard**.
+  ```c
+    for(int i=1; i<=8;i++)
+    {
+        val = val<<1;
+        printf("val = %d", val);
+        MCP23S17_WriteRegister(0x12, val);
+        MCP23S17_WriteRegister(0x13, val);
+        HAL_Delay(500);
+        if (i==8)
+        {
+            val=0xFF;
+            MCP23S17_WriteRegister(0x12, val);
+            MCP23S17_WriteRegister(0x13, val);
+        }
+    }
+
 
 ### 2.3 Driver
 - Écrire un **driver** pour piloter les LED.
