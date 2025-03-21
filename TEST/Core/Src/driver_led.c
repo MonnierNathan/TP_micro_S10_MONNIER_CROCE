@@ -4,9 +4,10 @@
  *  Created on: Mar 13, 2025
  *      Author: lcroce
  */
+#include "driver_led.h"
 
 uint8_t MCP23S17_SPI_Transmit(uint8_t data) {
-    uint8_t receivedData;
+	uint8_t receivedData;
     HAL_SPI_TransmitReceive(&hspi3, &data, &receivedData, 1, HAL_MAX_DELAY);
     return receivedData;
 }

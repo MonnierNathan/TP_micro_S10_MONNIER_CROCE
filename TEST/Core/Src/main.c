@@ -18,6 +18,9 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "dma.h"
+#include "i2c.h"
+#include "sai.h"
 #include "spi.h"
 #include "usart.h"
 #include "gpio.h"
@@ -50,6 +53,7 @@ extern SPI_HandleTypeDef hspi3;
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+void PeriphCommonClock_Config(void);
 /* USER CODE BEGIN PFP */
 uint8_t MCP23S17_SPI_Transmit(uint8_t data);
 void MCP23S17_WriteRegister(uint8_t reg, uint8_t value);
@@ -86,10 +90,15 @@ int main(void)
 
   /* USER CODE BEGIN Init */
 
+  __HAL_SAI_ENABLE(&hsai_BlockB2);
+  __HAL_SAI_ENABLE(&hsai_BlockA2);
   /* USER CODE END Init */
 
   /* Configure the system clock */
   SystemClock_Config();
+
+  /* Configure the peripherals common clocks */
+  PeriphCommonClock_Config();
 
   /* USER CODE BEGIN SysInit */
 
@@ -97,8 +106,11 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_USART2_UART_Init();
   MX_SPI3_Init();
+  MX_I2C2_Init();
+  MX_SAI2_Init();
   /* USER CODE BEGIN 2 */
   HAL_GPIO_WritePin(VU_nRST_GPIO_Port, VU_nRST_Pin, SET);
   HAL_GPIO_WritePin(VU_ncs_GPIO_Port, VU_ncs_Pin, SET);
@@ -193,32 +205,33 @@ void SystemClock_Config(void)
   }
 }
 
+/**
+  * @brief Peripherals Common Clock Configuration
+  * @retval None
+  */
+void PeriphCommonClock_Config(void)
+{
+  RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
+
+  /** Initializes the peripherals clock
+  */
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_SAI2;
+  PeriphClkInit.Sai2ClockSelection = RCC_SAI2CLKSOURCE_PLLSAI1;
+  PeriphClkInit.PLLSAI1.PLLSAI1Source = RCC_PLLSOURCE_HSI;
+  PeriphClkInit.PLLSAI1.PLLSAI1M = 1;
+  PeriphClkInit.PLLSAI1.PLLSAI1N = 13;
+  PeriphClkInit.PLLSAI1.PLLSAI1P = RCC_PLLP_DIV17;
+  PeriphClkInit.PLLSAI1.PLLSAI1Q = RCC_PLLQ_DIV2;
+  PeriphClkInit.PLLSAI1.PLLSAI1R = RCC_PLLR_DIV2;
+  PeriphClkInit.PLLSAI1.PLLSAI1ClockOut = RCC_PLLSAI1_SAI1CLK;
+  if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
+  {
+    Error_Handler();
+  }
+}
+
 /* USER CODE BEGIN 4 */
-uint8_t MCP23S17_SPI_Transmit(uint8_t data) {
-    uint8_t receivedData;
-    HAL_SPI_TransmitReceive(&hspi3, &data, &receivedData, 1, HAL_MAX_DELAY);
-    return receivedData;
-}
 
-void MCP23S17_WriteRegister(uint8_t reg, uint8_t value) {
-    MCP23S17_CS_LOW();
-    MCP23S17_SPI_Transmit(0x40);  // Adresse + écriture (0x40 = 0b01000000)
-    MCP23S17_SPI_Transmit(reg);
-    MCP23S17_SPI_Transmit(value);
-    MCP23S17_CS_HIGH();
-}
-
-/*
-	  uint8_t MCP23S17_ReadRegister(uint8_t reg) {
-    uint8_t value;
-    MCP23S17_CS_LOW();
-    MCP23S17_SPI_Transmit(0x41);  // Adresse + lecture (0x41 = 0b01000001)
-    MCP23S17_SPI_Transmit(reg);
-    value = MCP23S17_SPI_Transmit(0xFF);  // Lire la réponse
-    MCP23S17_CS_HIGH();
-    return value;
-}
-*/
 /* USER CODE END 4 */
 
 /**
