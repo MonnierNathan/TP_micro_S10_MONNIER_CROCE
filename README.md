@@ -22,6 +22,7 @@
 
 ### 2.2 Tests
 - Faire clignoter une ou plusieurs **LED**.
+   - ![IMG2](https://github.com/MonnierNathan/TP_micro_S10_MONNIER_CROCE/blob/main/Images/togglePIN.png "codeLedToggle")
 - Tester toutes les LED avec un **chenillard**.
 
 ### 2.3 Driver
