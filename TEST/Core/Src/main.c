@@ -120,6 +120,7 @@ int main(void)
   int val = 255;
 
   __HAL_SAI_ENABLE(&hsai_BlockA2);
+  init_sgtl(&hi2c2);
   unsigned char data;
 
 

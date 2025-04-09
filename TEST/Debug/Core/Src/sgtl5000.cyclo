@@ -1,0 +1,2 @@
+../Core/Src/sgtl5000.c:10:13:write_register	1
+../Core/Src/sgtl5000.c:20:6:init_sgtl	1
