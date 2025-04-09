@@ -67,6 +67,8 @@
 ### 3.2 Configuration du CODEC par l'I2C
 - Vérifier la présence d'une horloge sur **MCLK**.
   ![clkI2C](https://github.com/MonnierNathan/TP_micro_S10_MONNIER_CROCE/blob/master/Images/SDS00001.BMP "clkI2C")
+- Observer les trames I2C à l'oscilloscope
+  ![signalI2C](https://github.com/MonnierNathan/TP_micro_S10_MONNIER_CROCE/blob/master/misc/Screenshot%20I2C.png "signalI2C")
 - Lire et configurer les registres du **SGTL5000**.
 
 ### 3.3 Signaux I2S
