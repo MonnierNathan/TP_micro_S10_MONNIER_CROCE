@@ -48,7 +48,7 @@
             MCP23S17_WriteRegister(0x13, val);
         }
     }
-![vidéo Chenillard](https://github.com/MonnierNathan/TP_micro_S10_MONNIER_CROCE/blob/main/video/VID_20250321_143431.mp4)
+![vidéo Chenillard](https://github.com/MonnierNathan/TP_micro_S10_MONNIER_CROCE/blob/master/video/VID_20250321_143431.mp4)
 
 ### 2.3 Driver
 - Écrire un **driver** pour piloter les LED.
