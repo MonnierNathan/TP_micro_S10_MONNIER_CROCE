@@ -11,6 +11,7 @@
 /* USER CODE BEGIN Includes */
 
 #include <stdint.h>
+#include <stdbool.h>
 #include "main.h"
 #include "spi.h"
 #define MCP23S17_CS_LOW()   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, GPIO_PIN_RESET)

@@ -90,8 +90,8 @@ int main(void)
 
   /* USER CODE BEGIN Init */
 
-  __HAL_SAI_ENABLE(&hsai_BlockB2);
-  __HAL_SAI_ENABLE(&hsai_BlockA2);
+ // __HAL_SAI_ENABLE(&hsai_BlockB2);
+
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -111,12 +111,18 @@ int main(void)
   MX_SPI3_Init();
   MX_I2C2_Init();
   MX_SAI2_Init();
+
   /* USER CODE BEGIN 2 */
   HAL_GPIO_WritePin(VU_nRST_GPIO_Port, VU_nRST_Pin, SET);
   HAL_GPIO_WritePin(VU_ncs_GPIO_Port, VU_ncs_Pin, SET);
   MCP23S17_WriteRegister(0x00,  0x00);
   MCP23S17_WriteRegister(0x01,  0x00);
   int val = 255;
+
+  __HAL_SAI_ENABLE(&hsai_BlockA2);
+  unsigned char data;
+
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -126,11 +132,13 @@ int main(void)
   while (1)
   {
 	     /* Faire clignoter la LED de la NUCLEO */
-	      HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+
+	  	  HAL_I2C_Mem_Read(&hi2c2, 0x14, 0x0000, I2C_MEMADD_SIZE_8BIT, data, sizeof(data), HAL_MAX_DELAY);
+	      /*HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
 	      HAL_Delay(500);
 
 	      /* Mettre GPA0 à 1 */
-	      for(int i=1; i<=8;i++)
+	      /*for(int i=1; i<=8;i++)
 	      {
 	    	  val = val<<1;
 	    	  printf("val = %d", val);
@@ -140,7 +148,7 @@ int main(void)
 	    	  if (i==8)
 	    	 	    	  {
 	    	 	    	  	/* Mettre GPA0 à 0 */
-	 	    	  	val=0xFF;
+	 	 /*   	  	val=0xFF;
 	    	 	    	  	MCP23S17_WriteRegister(0x12, val);
 	    	 	    	  	MCP23S17_WriteRegister(0x13, val);
 	    	 	    	  }
