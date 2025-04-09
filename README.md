@@ -21,11 +21,11 @@
 
 ### 2.1 Configuration
 - Identifier la référence du **GPIO Expander** et télécharger sa datasheet.
-   - Référence MCP23S17-E/SO : [MCP23S17-E_SO.pdf](https://github.com/MonnierNathan/TP_micro_S10_MONNIER_CROCE/blob/main/MCP23S17-E_SO.pdf)
+   - Référence MCP23S17-E/SO : [MCP23S17-E_SO.pdf](https://github.com/MonnierNathan/TP_micro_S10_MONNIER_CROCE/blob/master/MCP23S17-E_SO.pdf)
 - Déterminer quel **SPI** est utilisé sur le **STM32**.
    - Le SPI utilisé sur le STM est le **SPI3**
 - Configurer les paramètres correspondants dans **STM32CubeIDE**.
-   - ![IMG](https://github.com/MonnierNathan/TP_micro_S10_MONNIER_CROCE/blob/main/Images/configSPI3.png "configSPI3")   
+   - ![IMG](https://github.com/MonnierNathan/TP_micro_S10_MONNIER_CROCE/blob/master/Images/configSPI3.png "configSPI3")   
 
 ### 2.2 Tests
 - Faire clignoter une ou plusieurs **LED**.
@@ -66,6 +66,7 @@
 
 ### 3.2 Configuration du CODEC par l'I2C
 - Vérifier la présence d'une horloge sur **MCLK**.
+  ![clkI2C](https://github.com/MonnierNathan/TP_micro_S10_MONNIER_CROCE/blob/master/Images/SDS00001.BMP "clkI2C")
 - Lire et configurer les registres du **SGTL5000**.
 
 ### 3.3 Signaux I2S
